@@ -33,4 +33,9 @@ public class Player : MonoBehaviour
     {
         transform.Translate(Vector2.down * currentSppeed * Time.fixedDeltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Game Over - !");
+    }
 }
