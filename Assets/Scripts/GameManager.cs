@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
 
+    public static GameManager Instance;
+
     public GameObject wallPrefab;
     public GameObject wall;
 
@@ -15,7 +17,14 @@ public class GameManager : MonoBehaviour
     public float spawnTimer;
 
     public TextMeshProUGUI scoreLabel;
-    private float score;
+    public float score { get; private set; }
+
+
+    private void Awake()
+    {
+        // 인스턴스화 되는 순간 자신을 넣는다 . 
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

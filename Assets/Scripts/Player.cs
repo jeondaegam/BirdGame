@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -34,8 +35,20 @@ public class Player : MonoBehaviour
         transform.Translate(Vector2.down * currentSppeed * Time.fixedDeltaTime);
     }
 
+    /**
+     * 벽과 충돌한 경우 게임오버
+     */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Game Over - !");
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // 플레이어 점수 저장
+            float score = GameManager.Instance.score;
+            PlayerPrefs.SetInt("Score", (int)score);
+            PlayerPrefs.Save();
+
+            // 게임 오버
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
