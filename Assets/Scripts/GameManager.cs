@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,17 +9,26 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject wallPrefab;
+    public GameObject wall;
 
     public float spawnTerm = 4f;
-
     public float spawnTimer;
 
-    public GameObject wall;
+    public TextMeshProUGUI scoreLabel;
+    private float score;
+
     // Start is called before the first frame update
     void Start()
     {
         spawnTimer = 0;
+        score = 0;
         //StartCoroutine("SpawnWalls");
+    }
+
+    void Update()
+    {
+        UpdateScore();
+        SpawnWall();
     }
 
     //IEnumerator SpawnWalls()
@@ -31,10 +41,12 @@ public class GameManager : MonoBehaviour
     //}
 
     // Update is called once per frame
-    void Update()
-    {
-        spawnTimer += Time.deltaTime;
 
+    /**
+     * 벽을 스폰한다
+     */
+    private void SpawnWall()
+    {
         if (spawnTimer >= spawnTerm)
         {
             wall = Instantiate(wallPrefab);
@@ -44,4 +56,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /**
+     * 실시간으로 점수를 계산한다
+     * 점수 = 플레이 시간
+     */
+    private void UpdateScore()
+    {
+        spawnTimer += Time.deltaTime;
+        score += Time.deltaTime;
+        scoreLabel.text = ((int)score).ToString();
+    }
 }
