@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject wallPrefab;
-    public GameObject wall;
+    private GameObject wall;
 
     public float spawnTerm = 4f;
     public float spawnTimer;
@@ -56,11 +56,13 @@ public class GameManager : MonoBehaviour
      */
     private void SpawnWall()
     {
+        spawnTimer += Time.deltaTime;
+
         if (spawnTimer >= spawnTerm)
         {
             wall = Instantiate(wallPrefab);
-            //spawnTimer = 0;
             wall.transform.position = new Vector2(10, Random.Range(-2f, 2f));
+            //spawnTimer = 0;
             spawnTimer -= spawnTerm;
         }
     }
@@ -71,7 +73,6 @@ public class GameManager : MonoBehaviour
      */
     private void UpdateScore()
     {
-        spawnTimer += Time.deltaTime;
         score += Time.deltaTime;
         scoreLabel.text = ((int)score).ToString();
     }

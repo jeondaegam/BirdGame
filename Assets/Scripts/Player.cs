@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Stats")]
     public float accel = 10f;
     public float gravty = 10f;
-
     public float currentSppeed;
+
+    [Header("Sfx")]
+    public AudioClip upSound;
+    public AudioClip downSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +33,20 @@ public class Player : MonoBehaviour
         else
         {
             currentSppeed += gravty * Time.deltaTime;
+        }
+
+        PlaySound();
+    }
+
+    private void PlaySound()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(upSound);
+        }
+        else if (Input.GetButtonUp("Jump"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(downSound);
         }
     }
 
@@ -51,4 +71,5 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("GameOverScene");
         }
     }
+
 }
