@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public GameObject wallPrefab;
     private GameObject wall;
 
+    public GameObject[] fencePrefabs;
+
+    public GameObject FencePrefab;
+
     public float spawnTerm = 4f;
     public float spawnTimer;
 
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // 인스턴스화 되는 순간 자신을 넣는다 . 
+        // 인스턴스화 되는 순간 자신을 넣는다 
         Instance = this;
     }
 
@@ -37,7 +41,30 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateScore();
-        SpawnWall();
+        //SpawnWall();
+
+        SpawnRandomFence();
+    }
+
+    private void SpawnRandomFence()
+    {
+        spawnTimer += Time.deltaTime;
+
+        if (spawnTimer >= spawnTerm)
+        {
+            GameObject randomFence = Instantiate(fencePrefabs[Random.Range(0, fencePrefabs.Length)]);
+
+            if (randomFence.name.StartsWith("Wall"))
+            {
+                randomFence.transform.position = new Vector2(10, Random.Range(-2f, 2f));
+            }
+            else
+            {
+                // y값은 오브젝트에 설정된 y값 고정
+                randomFence.transform.position = new Vector3(10, randomFence.transform.position.y);
+            }
+            spawnTimer -= spawnTerm;
+        }
     }
 
     //IEnumerator SpawnWalls()
@@ -49,7 +76,6 @@ public class GameManager : MonoBehaviour
     //    }
     //}
 
-    // Update is called once per frame
 
     /**
      * 벽을 스폰한다

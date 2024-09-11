@@ -24,11 +24,6 @@ public class GameOverManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     /**
      * 게임 재시작

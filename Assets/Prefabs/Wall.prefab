@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 4078747458734732514}
   - component: {fileID: 6724868995043071692}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e55726819e141c9a87fd1f05915323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 5
+  xPositionLimit: -10
 --- !u!1 &8546663954540277120
 GameObject:
   m_ObjectHideFlags: 0

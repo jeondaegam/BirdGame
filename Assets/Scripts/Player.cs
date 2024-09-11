@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float accel = 10f;
     public float gravty = 10f;
     public float currentSppeed;
+    private float score;
 
     [Header("Sfx")]
     public AudioClip upSound;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentSppeed = 0;
+        score = 0;
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             // 플레이어 점수 저장
-            float score = GameManager.Instance.score;
+            score = GameManager.Instance.score;
             PlayerPrefs.SetInt("Score", (int)score);
             PlayerPrefs.Save();
 
