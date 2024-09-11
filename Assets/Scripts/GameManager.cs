@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] fencePrefabs;
 
-    public GameObject FencePrefab;
-
     public float spawnTerm = 4f;
     public float spawnTimer;
 
@@ -53,7 +51,6 @@ public class GameManager : MonoBehaviour
         if (spawnTimer >= spawnTerm)
         {
             GameObject randomFence = Instantiate(fencePrefabs[Random.Range(0, fencePrefabs.Length)]);
-
             if (randomFence.name.StartsWith("Wall"))
             {
                 randomFence.transform.position = new Vector2(10, Random.Range(-2f, 2f));
